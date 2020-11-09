@@ -12,10 +12,9 @@ docker push quay.io/enterprisecoding/jenkins-suggested:latest
 Use following commands to start container;
 
 ```
-echo "admin" | docker secret create jenkins-user -
-echo "admin" | docker secret create jenkins-pass -
+echo "admin" > jenkins-user
+echo "admin" > jenkins-pass
 
-
-docker run --name jenkins -d -p 8080:8080 -p 50000:50000  --secret jenkins-user --secret jenkins-pass quay.io/enterprisecoding/jenkins-suggested:latest
+docker run --name jenkins -d -p 8080:8080 -p 50000:50000  -v  jenkins-user:/var/jenkins-user -v jenkins-pass:/var/jenkins-pass quay.io/enterprisecoding/jenkins-suggested:latest
 
 ```
